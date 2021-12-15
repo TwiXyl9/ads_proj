@@ -98,6 +98,7 @@ GEM
     bootstrap-will_paginate (1.0.0)
       will_paginate
     builder (3.2.4)
+    cancancan (3.3.0)
     capybara (3.36.0)
       addressable
       matrix
@@ -289,6 +290,7 @@ DEPENDENCIES
   bootsnap (>= 1.4.4)
   bootstrap-sass
   bootstrap-will_paginate
+  cancancan
   capybara (>= 3.26)
   debug (>= 1.0.0)
   faker
