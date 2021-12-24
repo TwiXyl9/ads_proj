@@ -3,4 +3,5 @@ import "@hotwired/turbo-rails"
 
 //= require jquery.js
 //= require jquery_ujs
+//= require bootstrap
 //= require bootstrap.min

@@ -28,7 +28,7 @@ gem 'sass-rails', '>= 6'
 gem 'turbolinks', '~> 5'
 
 gem "jquery-rails"
-
+gem "jquery"
 gem 'faker'
 
 # Use Redis adapter to run Action Cable in production

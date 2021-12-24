@@ -1,5 +1,8 @@
 <li>
   <%#= form.file_field :avatar %>
   <%= link_to user.name, user %>
-
+  <% if current_user.is?("admin") && !current_user?(user) %>
+     <%= button_to "delete", user, method: :delete,
+                  data: { confirm: "You sure?" } %>
+  <% end %>
 </li>
