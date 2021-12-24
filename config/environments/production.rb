@@ -117,7 +117,7 @@ Rails.application.configure do
   # config.active_record.database_resolver = ActiveRecord::Middleware::DatabaseSelector::Resolver
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
   config.action_mailer.delivery_method = :smtp
-  host = 'kolkin.2002@gmail.com' #replace with your own url
+  host = 'https://gentle-reef-47244.herokuapp.com' #replace with your own url
   config.action_mailer.default_url_options = { host: host }
 
   # SMTP settings for gmail
