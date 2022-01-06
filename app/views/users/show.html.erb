@@ -1,10 +1,18 @@
 <% provide(:title, @user.name) %>
-<div class="row">
-  <aside class="col-md-4">
-    <section class="user_info">
+<div class="container">
+  <% @user.ads.each do |ad|%>
+    <div class = "container" style="display:flex">
       <h1>
-        <%= @user.name %>
+        <%= ad.name %>
       </h1>
-    </section>
-  </aside>
+      <div style="display:flex; text-align: center;">
+        <%if ad.stage == "draft" %>
+          <%= button_to "To Publish", new_ad_path, method: :get%>
+          <%= button_to "Edit", new_ad_path, method: :get%>
+        <%end%>
+        <%= button_to "Delete", new_ad_path, method: :get%>
+      </div>
+    </div>
+  <%end %>
 </div>
+<%= button_to "Create Ad", new_ad_path, method: :get%>

@@ -1,0 +1,2 @@
+class AdsPhotosController < ApplicationController
+end

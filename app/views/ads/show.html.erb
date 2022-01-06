@@ -1,0 +1,20 @@
+<% provide(:title, @ad.name) %>
+<div class="row">
+  <section class="center">
+    <h1>
+      <%= @ad.name %>
+    </h1>
+    <h2>
+      <%= @ad.tag if @ad.stage == "published" %>
+    </h2>
+    <h2>
+      <%= @ad.description %>
+    </h2>
+    <% @ad.photos.each do |photo| %>
+      <%= image_tag photo.thumb.url %>
+    <h2>
+      <%= @ad.user.name %>
+    </h2>
+    <% end %>
+  </section>
+</div>

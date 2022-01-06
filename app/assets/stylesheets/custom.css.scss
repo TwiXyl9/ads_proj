@@ -67,7 +67,7 @@ p {
 /* header */
 
 #header1 {
-  background-color:  mediumslateblue;
+  background-color: cornflowerblue;
 
 
 }
@@ -101,7 +101,7 @@ footer a {
 }
 
 footer a:hover {
-  color: mediumslateblue;
+  color: cornflowerblue;
 }
 
 footer small {
@@ -137,6 +137,13 @@ aside {
       line-height: 1;
     }
     h1 {
+      font-size: 1.4em;
+      text-align: left;
+      letter-spacing: -1px;
+      margin-bottom: 3px;
+      margin-top: 0px;
+    }
+    h2 {
       font-size: 1.4em;
       text-align: left;
       letter-spacing: -1px;
@@ -211,4 +218,46 @@ input {
 /* dropdown item text color */
 .navbar-inverse .navbar-nav > li > a {
   color: #ffffff;
+}
+
+.image-box {
+  text-align: center;
+  font-size: 18px;
+  margin: auto;
+  width: auto;
+  height: auto;
+}
+
+.thumb {
+  width: 90px;
+  height: 90px;
+  margin: 0.2em -0.7em 3 0;
+
+}
+
+.remove_img_preview {
+  position: relative;
+  top: -25 px;
+  right: 5px;
+  background: black;
+  color: white;
+  border-radius: 50px;
+  font-size: 0.9em;
+  padding: 0 0.3em 0;
+  text-align: center;
+  cursor: pointer;
+
+  &:before {
+    content: "×";
+  }
+}
+
+.btn-group button {
+  vertical-align: top;
+  background-color: #4CAF50; /* Green background */
+  border: 1px solid green; /* Green border */
+  color: white; /* White text */
+  padding: 10px 24px; /* Some padding */
+  cursor: pointer; /* Pointer/hand icon */
+  float: left; /* Float the buttons side by side */
 }

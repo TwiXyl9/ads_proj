@@ -8,7 +8,11 @@ gem "rails", "~> 7.0.0.rc1"
 gem "cancancan"
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails", ">= 3.4.1"
-
+gem "carrierwave"
+gem "mini_magick"
+gem "fog"
+gem "activestorage-validator"
+gem "rmagick", :require => "rmagick"
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
 gem "importmap-rails", ">= 0.9.2"
 
