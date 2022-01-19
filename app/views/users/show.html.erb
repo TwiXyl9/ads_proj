@@ -12,7 +12,7 @@
         </h1>
         <div style="display:flex; text-align: center;">
 
-          <%= button_to "To Publish", edit_ad_path(ad, t: 1), method: :get, remote: true, class: "publish-ad"%>
+          <%= link_to "To Publish", edit_ads_stage_path(ad, stage: :pending), method: :get, class: "publish-ad"%>
           <%= button_to "Edit", edit_ad_path(ad), method: :get%>
           <%= button_to "Delete", ad, method: :delete %>
 
