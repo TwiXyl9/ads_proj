@@ -10,7 +10,12 @@ gem "cancancan"
 gem "sprockets-rails", ">= 3.4.1"
 gem "carrierwave"
 gem "mini_magick"
-gem "fog"
+
+gem 'omniauth'
+gem 'omniauth-facebook'
+gem 'omniauth-vkontakte'
+
+#gem "fog"
 gem "activestorage-validator"
 gem "rmagick", :require => "rmagick"
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]

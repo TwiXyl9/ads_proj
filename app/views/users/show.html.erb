@@ -1,18 +1,62 @@
 <% provide(:title, @user.name) %>
-<div class="container">
-  <% @user.ads.each do |ad|%>
-    <div class = "container" style="display:flex">
-      <h1>
-        <%= ad.name %>
-      </h1>
-      <div style="display:flex; text-align: center;">
-        <%if ad.stage == "draft" %>
-          <%= button_to "To Publish", new_ad_path, method: :get%>
-          <%= button_to "Edit", new_ad_path, method: :get%>
-        <%end%>
-        <%= button_to "Delete", new_ad_path, method: :get%>
+<div class="container" style="outline: 2px solid #000; margin: 5px">
+  <% if @user.ads.where(stage: "draft").size > 0%>
+    <h1>Drafts</h1>
+    <% @user.ads.where(stage: "draft").each do |ad|%>
+
+      <div class = "container" style="display:flex; margin: 10px">
+
+        <%= image_tag ad.photos.first.mini_pic.url %>
+        <h1>
+          <%= ad.name %>
+        </h1>
+        <div style="display:flex; text-align: center;">
+
+          <%= button_to "To Publish", edit_ad_path(ad, t: 1), method: :get, remote: true, class: "publish-ad"%>
+          <%= button_to "Edit", edit_ad_path(ad), method: :get%>
+          <%= button_to "Delete", ad, method: :delete %>
+
+        </div>
+
       </div>
-    </div>
-  <%end %>
+
+    <% end %>
+  <% end %>
+
+  <% if @user.ads.where(stage: "pending").size > 0 %>
+
+    <h1>Pending</h1>
+
+    <% @user.ads.where(stage: "pending").each do |ad|%>
+
+      <div class = "container" style="display:flex; margin: 10px">
+
+        <%= image_tag ad.photos.first.mini_pic.url %>
+        <h1>
+          <%= ad.name %>
+        </h1>
+        <div style="display:flex; text-align: center;">
+
+          <%= button_to "Edit", edit_ad_path(ad), method: :get%>
+          <%= button_to "Delete", ad, method: :delete %>
+
+        </div>
+
+      </div>
+
+    <% end %>
+  <% end %>
+
 </div>
 <%= button_to "Create Ad", new_ad_path, method: :get%>
+
+<script>
+  $(window).on("load", () => {
+     const publishButton = $(".publish-ad");
+     publishButton.on("ajax:success", function () {
+         console.log("HHHHHHELLO");
+     })
+  });
+
+
+</script>
