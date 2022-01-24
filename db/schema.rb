@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(version: 2022_01_05_101951) do
     t.string "name"
     t.text "description"
     t.integer "stage"
+    t.string "reason_for_rejection"
     t.string "photos", default: [], array: true
     t.bigint "tag_id"
     t.bigint "user_id", null: false

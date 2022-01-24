@@ -15,7 +15,7 @@ class AdsController < ApplicationController
       redirect_to current_user
     else
       puts @ad.errors.full_messages
-      render new
+      render 'new'
     end
   end
 
@@ -38,20 +38,12 @@ class AdsController < ApplicationController
   end
 
   def update
-    if params[:t] == 1
-      @ad.stage = "pending"
-      if @ad.update(ad_params)
-        flash[:success] = "Ad sent for moderation!"
-      end
+    if @ad.update(ad_params)
+      flash[:success] = "Ad updated"
+      redirect_to current_user
     else
-      if @ad.update(ad_params)
-        flash[:success] = "Ad updated"
-        redirect_to current_user
-      else
-        render 'edit'
-      end
+      render 'edit'
     end
-
   end
 
   private

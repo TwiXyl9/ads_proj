@@ -1,54 +1,130 @@
 <% provide(:title, @user.name) %>
-<div class="container" style="outline: 2px solid #000; margin: 5px">
-  <% if @user.ads.where(stage: "draft").size > 0%>
-    <h1>Drafts</h1>
-    <% @user.ads.where(stage: "draft").each do |ad|%>
+<div class="container" style="margin: 5px">
 
-      <div class = "container" style="display:flex; margin: 10px">
+  <% if @user.ads.where(stage: "draft").size > 0 %>
+    <div style = "outline: 2px solid #000;">
 
-        <%= image_tag ad.photos.first.mini_pic.url %>
-        <h1>
-          <%= ad.name %>
-        </h1>
-        <div style="display:flex; text-align: center;">
+      <h1>Draft</h1>
 
-          <%= link_to "To Publish", edit_ads_stage_path(ad, stage: :pending), method: :get, class: "publish-ad"%>
-          <%= button_to "Edit", edit_ad_path(ad), method: :get%>
-          <%= button_to "Delete", ad, method: :delete %>
+      <% @user.ads.where(stage: "draft").each do |ad|%>
 
+        <div class = "container" style="display:flex; margin: 10px; ">
+          <%= image_tag ad.photos.first.mini_pic.url %>
+          <h1>
+            <%= ad.name %>
+          </h1>
+          <div style="display:flex; text-align: center;">
+            <%= link_to "To Pending", edit_ads_stage_path(ad, stage: :pending), method: :get, class: "publish-ad"%>
+            <%= button_to "Delete", ad, method: :delete %>
+          </div>
         </div>
+      <% end %>
+    </div>
+  <%else%>
+    <h1>You don't have drafts, want to create?</h1>
+  <%end%>
 
-      </div>
+  <div style="display: flex; justify-content: center;">
+    <%= button_to "Create Ad", new_ad_path, method: :get%>
+  </div>
 
-    <% end %>
-  <% end %>
 
   <% if @user.ads.where(stage: "pending").size > 0 %>
+    <div style = "outline: 2px solid #000;">
 
-    <h1>Pending</h1>
+      <h1>Pending</h1>
 
-    <% @user.ads.where(stage: "pending").each do |ad|%>
+      <% @user.ads.where(stage: "pending").each do |ad|%>
 
-      <div class = "container" style="display:flex; margin: 10px">
-
-        <%= image_tag ad.photos.first.mini_pic.url %>
-        <h1>
-          <%= ad.name %>
-        </h1>
-        <div style="display:flex; text-align: center;">
-
-          <%= button_to "Edit", edit_ad_path(ad), method: :get%>
-          <%= button_to "Delete", ad, method: :delete %>
+        <div class = "container" style="display:flex; margin: 10px">
+          <%= image_tag ad.photos.first.mini_pic.url %>
+          <h1>
+            <%= ad.name %>
+          </h1>
+          <div style="display:flex; text-align: center;">
+            <%= button_to "Delete", ad, method: :delete %>
+          </div>
 
         </div>
 
-      </div>
+      <% end %>
+    </div>
+  <% end %>
 
-    <% end %>
+  <% if @user.ads.where(stage: "rejected").size > 0 %>
+    <div style = "outline: 2px solid #000;">
+
+      <h1>Rejected</h1>
+
+      <% @user.ads.where(stage: "rejected").each do |ad|%>
+
+        <div class = "container" style="display:flex; margin: 10px">
+
+          <%= image_tag ad.photos.first.mini_pic.url %>
+          <h1>
+            <%= ad.name %>
+          </h1>
+          <div style="display:flex; text-align: center;">
+            <%= link_to "To Draft", edit_ads_stage_path(ad, stage: :draft), method: :get, class: "publish-ad"%>
+            <%= button_to "Delete", ad, method: :delete %>
+          </div>
+
+        </div>
+
+      <% end %>
+    </div>
+  <% end %>
+
+  <% if @user.ads.where(stage: "published").size > 0 %>
+    <div style = "outline: 2px solid #000;">
+
+      <h1>Published</h1>
+
+      <% @user.ads.where(stage: "published").each do |ad|%>
+
+        <div class = "container" style="display:flex; margin: 10px">
+
+          <%= image_tag ad.photos.first.mini_pic.url %>
+          <h1>
+            <%= ad.name %>
+          </h1>
+          <div style="display:flex; text-align: center;">
+            <%= link_to "To Draft", edit_ads_stage_path(ad, stage: :draft), method: :get, class: "publish-ad"%>
+            <%= button_to "Delete", ad, method: :delete %>
+          </div>
+
+        </div>
+
+      <% end %>
+    </div>
+  <% end %>
+
+  <% if @user.ads.where(stage: "archival").size > 0 %>
+    <div style = "outline: 2px solid #000;">
+
+      <h1>Archival</h1>
+
+      <% @user.ads.where(stage: "archival").each do |ad|%>
+
+        <div class = "container" style="display:flex; margin: 10px">
+
+          <%= image_tag ad.photos.first.mini_pic.url %>
+          <h1>
+            <%= ad.name %>
+          </h1>
+          <div style="display:flex; text-align: center;">
+            <%= link_to "To Draft", edit_ads_stage_path(ad, stage: :draft), method: :get, class: "publish-ad"%>
+            <%= button_to "Delete", ad, method: :delete %>
+          </div>
+
+        </div>
+
+      <% end %>
+    </div>
   <% end %>
 
 </div>
-<%= button_to "Create Ad", new_ad_path, method: :get%>
+
 
 <script>
   $(window).on("load", () => {
