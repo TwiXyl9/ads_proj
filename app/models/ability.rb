@@ -6,14 +6,13 @@ class Ability
   def initialize(user)
 
 
-       user ||= User.new # guest user (not logged in)
-       if user.admin?
-         can :manage, :all
-       elsif user.authorized?
-         #can
-       else
-         can :read, :all
-       end
+    can :read, public: true
+
+    return unless user.present?  # additional permissions for logged in users (they can read their own posts)
+    can :read, user: user
+
+    return unless user.admin?  # additional permissions for administrators
+    can :manage
     #
     # The first argument to `can` is the action you are giving the user
     # permission to do.

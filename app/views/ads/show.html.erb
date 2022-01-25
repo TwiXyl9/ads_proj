@@ -12,12 +12,13 @@
     <h2>
       <%= @ad.description %>
     </h2>
-
-    <% @ad.photos.each do |photo| %>
-      <%= image_tag photo.thumb.url %>
+    <div type="container">
+      <% @ad.photos.each do |photo| %>
+        <%= image_tag photo.thumb.url %>
+      <% end %>
+    </div>
     <h2>
       <%= @ad.user.name %>
     </h2>
-    <% end %>
   </section>
 </div>

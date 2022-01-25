@@ -15,7 +15,7 @@ class User < ApplicationRecord
   validates :password, presence: true, length: { minimum: 8 }
   #, format: { with: VALID_PASSWORD_REGEX, message: "Should contain letters and numbers" }
   has_secure_password
-  Roles = [ :admin , :authorized ]
+  roles = [ :admin , :authorized ]
 
   def is?( requested_role )
     self.role == requested_role.to_s
