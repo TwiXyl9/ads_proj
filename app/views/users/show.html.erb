@@ -14,7 +14,7 @@
             <%= ad.name %>
           </h1>
           <div style="display:flex; text-align: center;">
-            <%= link_to "To Pending", edit_ads_stage_path(ad, stage: :pending), method: :get, class: "publish-ad"%>
+            <%= link_to "To Pending", edit_ads_stage_path(ad, stage: :pending), method: :get, class: "btn btn-primary"%>
             <%= button_to "Edit", ad, method: :edit, class: "btn btn-default" %>
             <%= button_to "Delete", ad, method: :delete, class: "btn btn-default"  %>
           </div>

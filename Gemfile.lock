@@ -275,6 +275,7 @@ GEM
       sprockets (> 3.0)
       sprockets-rails
       tilt
+    select_all-rails (0.3.2)
     selenium-webdriver (4.1.0)
       childprocess (>= 0.5, < 5.0)
       rexml (~> 3.2, >= 3.2.5)
@@ -347,6 +348,7 @@ DEPENDENCIES
   rails_12factor
   rmagick
   sass-rails (>= 6)
+  select_all-rails
   selenium-webdriver (>= 4.0.0)
   sprockets-rails (>= 3.4.1)
   stimulus-rails (>= 0.7.3)

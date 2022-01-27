@@ -14,7 +14,7 @@ gem "mini_magick"
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-vkontakte'
-
+gem 'select_all-rails'
 #gem "fog"
 gem "activestorage-validator"
 gem "rmagick", :require => "rmagick"

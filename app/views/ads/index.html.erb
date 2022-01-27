@@ -9,81 +9,85 @@
 
   <%= will_paginate %>
 <%else%>
-  <h1>Pending</h1>
-  <table style="width:100%;">
-    <tr>
-      <th>
-        Choose
-        <input type="checkbox" style="align:center; " id="checkAll">
-      </th>
-      <th>Title</th>
-      <th>Author</th>
-      <th>Status</th>
-      <th>More...</th>
-    </tr>
-    <%@ads.where(stage: ["pending", "published"]).each do |ad| %>
-      <tr>
-        <td>
-          <input type="checkbox" name="checkUser" id="simple_check" value=ad.id />
-        </td>
-        <td>
-          <%= ad.name %>
-        </td>
-        <td>
-          <%= ad.user.name %>
-        </td>
-        <td>
-          <%= ad.stage %>
-        </td>
-        <td>
-          <%= link_to "More...", ad%>
-        </td>
-      </tr>
-    <%end %>
-  </table>
-  <div style="display:flex; text-align: center; justify-content: center;">
-    <%= button_to "Approve"%>
-    <%= button_to "Reject"%>
-  </div>
+  <% if @ads.where(stage: "pending").size > 0 %>
+    <%= form_tag("ads/destroy_multiple", method: "delete") do %>
+      <h1>Pending</h1>
+      <table style="width:100%;">
+        <tr>
+          <th data-sort-ignore="true">
+            Choose
+            <input type="checkbox" id="selectAll">
+          </th>
+          <th>Title</th>
+          <th>Author</th>
+          <th>Status</th>
+          <th>More...</th>
+        </tr>
+        <%@ads.where(stage: "pending").each do |ad| %>
+          <tr>
+            <td>
+              <%= check_box_tag "ad_ids[]", ad.id, false, class: 'selectable' %>
+            </td>
+            <td>
+              <%= ad.name%>
+            </td>
+            <td>
+              <%= ad.user.name %>
+            </td>
+            <td>
+              <%= ad.stage %>
+            </td>
+            <td>
+              <%= link_to "More...", ad%>
+            </td>
+          </tr>
+        <%end%>
+      </table>
+      <div style="display:flex; text-align: center; justify-content: center;">
+        <%= submit_tag "Delete selected", class: "btn btn-primary" %>
+        <%= button_to "Reject"%>
+      </div>
+    <%end%>
+  <%end%>
 
-  <h1>Published</h1>
-  <table style="width:100%;">
-    <tr>
-      <th>
-        Choose
-        <input type="checkbox" style="align:center; " id="checkAll">
-      </th>
-      <th>Title</th>
-      <th>Author</th>
-      <th>Status</th>
-      <th>More...</th>
-    </tr>
-    <%@ads.where(stage: ["pending", "published"]).each do |ad| %>
+  <% if @ads.where(stage: "published").size > 0 %>
+    <h1>Published</h1>
+    <table style="width:100%;">
       <tr>
-        <td>
-          <input type="checkbox" name="checkUser" id="simple_check" value=ad.id />
-        </td>
-        <td>
-          <%= ad.name %>
-        </td>
-        <td>
-          <%= ad.user.name %>
-        </td>
-        <td>
-          <%= ad.stage %>
-        </td>
-        <td>
-          <%= link_to "More...", ad%>
-        </td>
+        <th>
+          Choose
+          <input type="checkbox" style="align:center; " id="checkAll">
+        </th>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Status</th>
+        <th>More...</th>
       </tr>
-    <%end %>
-  </table>
-  <div style="display:flex; text-align: center; justify-content: center;">
-    <%= button_to "Delete"%>
-  </div>
+      <%@ads.where(stage: "published").each do |ad| %>
+        <tr>
+          <td>
+            <input type="checkbox" name="checkUser" id="simple_check" value=ad.id />
+          </td>
+          <td>
+            <%= ad.name %>
+          </td>
+          <td>
+            <%= ad.user.name %>
+          </td>
+          <td>
+            <%= ad.stage %>
+          </td>
+          <td>
+            <%= link_to "More...", ad%>
+          </td>
+        </tr>
+      <%end %>
+    </table>
+    <div style="display:flex; text-align: center; justify-content: center;">
+      <%= button_to "Delete"%>
+    </div>
+  <%end%>
 <%end%>
-<script>
-    $("#checkAll").change(function () {
-        $('input[id="simple_check"]').prop('checked', this.checked);
-    });
+<script type="text/javascript">
+    $("#selectAll").select_all();
 </script>
