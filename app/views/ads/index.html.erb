@@ -1,3 +1,4 @@
+
 <% provide(:title, 'All Ads') %>
 <h1>All Ads</h1>
 <%if current_user.role != 'admin' %>
@@ -10,84 +11,102 @@
   <%= will_paginate %>
 <%else%>
   <% if @ads.where(stage: "pending").size > 0 %>
-    <%= form_tag("ads/destroy_multiple", method: "delete") do %>
+    <%= form_with url: update_multiple_ads_url, method: :patch do %>
+
       <h1>Pending</h1>
-      <table style="width:100%;">
-        <tr>
-          <th data-sort-ignore="true">
-            Choose
-            <input type="checkbox" id="selectAll">
-          </th>
-          <th>Title</th>
-          <th>Author</th>
-          <th>Status</th>
-          <th>More...</th>
-        </tr>
-        <%@ads.where(stage: "pending").each do |ad| %>
+      <table class="table">
+        <thead class="thead-dark">
           <tr>
-            <td>
-              <%= check_box_tag "ad_ids[]", ad.id, false, class: 'selectable' %>
-            </td>
-            <td>
-              <%= ad.name%>
-            </td>
-            <td>
-              <%= ad.user.name %>
-            </td>
-            <td>
-              <%= ad.stage %>
-            </td>
-            <td>
-              <%= link_to "More...", ad%>
-            </td>
+            <th data-sort-ignore="true">
+              Choose
+              <input type="checkbox" id="selectAll">
+            </th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Status</th>
+            <th>More...</th>
           </tr>
-        <%end%>
+        </thead>
+        <tbody>
+          <%@ads.where(stage: "pending").each do |ad| %>
+            <tr>
+              <td>
+                <%= check_box_tag  "ad_ids[]", ad.id, false, class: 'selectable' %>
+              </td>
+              <td>
+                <%= ad.name%>
+              </td>
+              <td>
+                <%= ad.user.name %>
+              </td>
+              <td>
+                <%= ad.stage %>
+              </td>
+              <td>
+                <%= link_to "More...", ad%>
+              </td>
+            </tr>
+          <%end%>
+        </tbody>
       </table>
       <div style="display:flex; text-align: center; justify-content: center;">
-        <%= submit_tag "Delete selected", class: "btn btn-primary" %>
-        <%= button_to "Reject"%>
+        <%= submit_tag "Approve", name: :stage, value: :published, class: "btn btn-primary" %>
+        <%= button_to "To Pending",  reject_multiple_ads_path, method: :patch%>
+      </div>
+      <div id="modal-window" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content"></div>
+        </div>
       </div>
     <%end%>
   <%end%>
 
   <% if @ads.where(stage: "published").size > 0 %>
-    <h1>Published</h1>
-    <table style="width:100%;">
-      <tr>
-        <th>
-          Choose
-          <input type="checkbox" style="align:center; " id="checkAll">
-        </th>
-        <th>Title</th>
-        <th>Author</th>
-        <th>Status</th>
-        <th>More...</th>
-      </tr>
-      <%@ads.where(stage: "published").each do |ad| %>
-        <tr>
-          <td>
-            <input type="checkbox" name="checkUser" id="simple_check" value=ad.id />
-          </td>
-          <td>
-            <%= ad.name %>
-          </td>
-          <td>
-            <%= ad.user.name %>
-          </td>
-          <td>
-            <%= ad.stage %>
-          </td>
-          <td>
-            <%= link_to "More...", ad%>
-          </td>
-        </tr>
-      <%end %>
-    </table>
-    <div style="display:flex; text-align: center; justify-content: center;">
-      <%= button_to "Delete"%>
-    </div>
+    <%= form_with url: destroy_multiple_ads_path, method: :delete do %>
+
+      <h1>Published</h1>
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th data-sort-ignore="true">
+              Choose
+            </th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Status</th>
+            <th>More...</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%@ads.where(stage: "published").each do |ad| %>
+            <tr>
+              <td>
+                <%= check_box_tag  "ad_ids[]",ad.id, false, class: 'selectable' %>
+              </td>
+              <td>
+                <%= ad.name%>
+              </td>
+              <td>
+                <%= ad.user.name %>
+              </td>
+              <td>
+                <%= ad.stage %>
+              </td>
+              <td>
+                <%= link_to "More...", ad%>
+              </td>
+            </tr>
+          <%end%>
+        </tbody>
+      </table>
+      <div style="display:flex; text-align: center; justify-content: center;">
+        <%= submit_tag "Delete selected", class: "btn btn-primary" %>
+      </div>
+    <%end%>
   <%end%>
 <%end%>
-<script type="text/javascript">
-    $("#selectAll").select_all();
+<script>
+    $(function() {
+        $("#selectAll").select_all();
+    });
 </script>

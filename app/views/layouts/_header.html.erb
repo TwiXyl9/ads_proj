@@ -1,8 +1,8 @@
 <header class="navbar navbar-fixed-top navbar-inverse" id="header1" style="background-color: indigo;">
-  <div class="container header-content">
+  <div class="container">
     <%= link_to "ads app", root_path, id: "logo" %>
     <nav>
-      <ul class="nav navbar-nav navbar-right">
+      <ul class="nav navbar-nav navbar-right" style="display: inline;">
         <li><%= link_to "Home",    ads_path %></li>
         <li><%= link_to "Help",    help_path %></li>
         <% if logged_in? %>
@@ -12,7 +12,7 @@
               Account <b class="caret"></b>
             </a>
             <ul class="dropdown-menu">
-              <%if current_user.role != "admin" %>
+              <%if current_user.role == "admin" %>
                 <li><%= link_to "My Ads", current_user %></li>
               <%end %>
               <li><%= link_to "Settings", edit_user_path(current_user) %></li>

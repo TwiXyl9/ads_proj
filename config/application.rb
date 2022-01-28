@@ -5,7 +5,6 @@ require "rails/all"
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
-Rails.configuration.action_controller.per_form_csrf_tokens = true
 module Ads1
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.

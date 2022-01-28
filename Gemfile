@@ -55,9 +55,12 @@ gem "aws-sdk-s3", require: false
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", ">= 1.4.4", require: false
 gem 'bootstrap-sass'
-
+gem 'bootstrap'
 gem 'will_paginate'
 gem 'bootstrap-will_paginate'
+gem 'popper_js'
+
+gem 'lazybox'
 
 gem 'bcrypt'
     # Use Sass to process CSS

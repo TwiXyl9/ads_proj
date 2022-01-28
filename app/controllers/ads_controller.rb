@@ -1,9 +1,9 @@
 class AdsController < ApplicationController
 
   before_action :logged_in_user, only: [:create, :destroy]
-  self.per_form_csrf_tokens = true
 
-  #skip_before_action :verify_authenticity_token
+  skip_before_action :verify_authenticity_token, only: [:destroy_multiple, :reject_multiple, :update_multiple]
+
   def new
     @ad = Ad.new
     @ad.stage = "draft"
@@ -22,7 +22,6 @@ class AdsController < ApplicationController
   end
 
   def destroy
-    puts "HELLLLLLO"
     Ad.find(params[:id]).destroy
     flash[:success] = "Ad deleted"
     redirect_to current_user
@@ -50,14 +49,29 @@ class AdsController < ApplicationController
   end
 
   def destroy_multiple
-    puts "HELLLLLLO"
+    puts params
     Ad.destroy(params[:ad_ids]) if params[:ad_ids]
-    respond_to do |format|
-      format.html { redirect_to ads_path }
-      format.json { head :no_content }
-    end
+    redirect_to ads_path
   end
 
+  def update_multiple
+     if params[:ad_ids] && params[:stage]
+       params[:ad_ids].each do |id|
+         @ad = Ad.find(id)
+         @ad.update(:stage => params[:stage])
+       end
+     end
+    redirect_to ads_path
+  end
+
+  def reject_multiple
+    puts "HEEEELLLLOOOO"
+    puts params
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
   private
   def ad_params
     params.require(:ad).permit(:tag,:stage,:name,:description,{photos:[]})

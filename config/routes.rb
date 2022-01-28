@@ -18,6 +18,8 @@ Rails.application.routes.draw do
   resources :ads do
     collection do
       delete 'destroy_multiple'
+      patch 'update_multiple'
+      patch 'reject_multiple'
     end
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
