@@ -1,0 +1,34 @@
+
+<%if @tags.size > 0 %>
+  <table class="table">
+    <thead class="thead-dark">
+    <tr>
+      <th>Name</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+      <%@tags.each do |tag| %>
+        <tr>
+          <td>
+            <%= tag.name%>
+          </td>
+          <td>
+            <%= button_to "Delete", tag, method: :delete, class: "btn btn-default" %>
+          </td>
+        </tr>
+      <%end%>
+    </tbody>
+  </table>
+<%end%>
+<div style = "outline: 2px solid #000;">
+  <%= form_with do |f|%>
+    <div>
+      <h3>Name:</h3>
+      <%= f.text_field :name %>
+    </div>
+    <div style="display: flex; justify-content: center;">
+      <%= f.submit "Add tag",  class: "btn btn-default" %>
+    </div>
+  <%end%>
+</div>

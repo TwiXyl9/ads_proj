@@ -28,15 +28,16 @@
         if(window.File && window.FileList && window.FileReader)
         {
             var filesInput = document.getElementById("files");
-
+            var pictureArr = [];
             filesInput.addEventListener("change", function(event){
 
                 var files = event.target.files; //FileList object
+                pictureArr.push(files);
                 var output = document.getElementById("result");
 
-                for(var i = 0; i< files.length; i++)
+                for(var i = 0; i< pictureArr.length; i++)
                 {
-                    var file = files[i];
+                    var file = pictureArr[i];
 
                     //Only pics
                     if(!file.type.match('image'))

@@ -14,6 +14,7 @@
             <ul class="dropdown-menu">
               <%if current_user.role == "admin" %>
                 <li><%= link_to "My Ads", current_user %></li>
+                <li><%= link_to "Tags", tags_path %></li>
               <%end %>
               <li><%= link_to "Settings", edit_user_path(current_user) %></li>
               <li class="divider"></li>

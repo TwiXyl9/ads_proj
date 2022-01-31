@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   post   'login'   => 'sessions#create'
   delete 'logout'  => 'sessions#destroy'
 
-  resources :tag
+  resources :tags
   resources :ads_photos
   resources :ads_stages, only: [:edit, :update]
   resources :users
