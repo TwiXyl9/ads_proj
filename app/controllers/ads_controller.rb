@@ -56,23 +56,31 @@ class AdsController < ApplicationController
 
   def update_multiple
      if params[:ad_ids] && params[:stage]
-       params[:ad_ids].each do |id|
-         @ad = Ad.find(id)
-         @ad.update(:stage => params[:stage])
+       if params[:stage] == "published"
+         params[:ad_ids].each do |id|
+           @ad = Ad.find(id)
+           @ad.update(:stage => params[:stage])
+         end
+       else
+         params[:ad_ids].each do |id|
+           @ad = Ad.find(id)
+           @ad.update(:stage => params[:stage], :reason_for_rejection => params[:reason])
+         end
        end
      end
     redirect_to ads_path
   end
 
   def reject_multiple
-    puts "HEEEELLLLOOOO"
-    puts params
+    @ad_ids = params[:ad_ids]
     respond_to do |format|
       format.html
       format.js
     end
   end
+
   private
+
   def ad_params
     params.require(:ad).permit(:tag,:stage,:name,:description,{photos:[]})
   end

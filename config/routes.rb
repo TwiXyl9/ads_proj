@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   post   'login'   => 'sessions#create'
   delete 'logout'  => 'sessions#destroy'
 
+  resources :tag
   resources :ads_photos
   resources :ads_stages, only: [:edit, :update]
   resources :users
@@ -19,7 +20,7 @@ Rails.application.routes.draw do
     collection do
       delete 'destroy_multiple'
       patch 'update_multiple'
-      patch 'reject_multiple'
+      get 'reject_multiple'
     end
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

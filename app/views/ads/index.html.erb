@@ -17,10 +17,7 @@
       <table class="table">
         <thead class="thead-dark">
           <tr>
-            <th data-sort-ignore="true">
-              Choose
-              <input type="checkbox" id="selectAll">
-            </th>
+            <th data-sort-ignore="true">Choose</th>
             <th>Title</th>
             <th>Author</th>
             <th>Status</th>
@@ -49,22 +46,39 @@
           <%end%>
         </tbody>
       </table>
-      <div style="display:flex; text-align: center; justify-content: center;">
-        <%= submit_tag "Approve", name: :stage, value: :published, class: "btn btn-primary" %>
-        <%= button_to "To Pending",  reject_multiple_ads_path, method: :patch%>
-      </div>
-      <div id="modal-window" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-          <div class="modal-content"></div>
+
+      <div id="modal-window" class="modal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title" id="myModalLabel">Reason for rejection:</h4>
+              <button type="button" class="close" data-dismiss="modal">x</button>
+            </div>
+            <div class="modal-body">
+              <%=hidden_field_tag :stage, :rejected %>
+              <%= text_field_tag 'reason' %>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-primary">Rejected</button>
+            </div>
+          </div>
         </div>
       </div>
+
+      <div style="display:flex; text-align: center; justify-content: center;">
+        <%= submit_tag "Approve", name: :stage, value: :published, class: "btn btn-primary" %>
+        <%= link_to 'Reject', reject_multiple_ads_path,  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'btn btn-primary btn-lg'}  %>
+      </div>
+
+
+
     <%end%>
   <%end%>
 
   <% if @ads.where(stage: "published").size > 0 %>
     <%= form_with url: destroy_multiple_ads_path, method: :delete do %>
 
-      <h1>Published</h1>
+      <h1 style='margin-top: 20px'>Published</h1>
       <table class="table">
         <thead class="thead-dark">
           <tr>
@@ -104,9 +118,4 @@
       </div>
     <%end%>
   <%end%>
-<%end%>
-<script>
-    $(function() {
-        $("#selectAll").select_all();
-    });
-</script>
+<%end %>
