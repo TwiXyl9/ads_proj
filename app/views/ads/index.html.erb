@@ -47,7 +47,7 @@
         </tbody>
       </table>
 
-      <div id="modal-window" class="modal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div id="reject_modal-window" class="modal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
@@ -65,12 +65,27 @@
         </div>
       </div>
 
-      <div style="display:flex; text-align: center; justify-content: center;">
-        <%= submit_tag "Approve", name: :stage, value: :published, class: "btn btn-primary" %>
-        <%= link_to 'Reject', reject_multiple_ads_path,  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'btn btn-primary btn-lg'}  %>
+      <div style="display:flex; text-align: center; justify-content: center;"
+        <%= link_to 'Approve', approve_multiple_ads_path,  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#approve_modal-window', class: 'btn btn-primary btn-lg'}  %>
+        <%= link_to 'Reject', reject_multiple_ads_path,  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#reject_modal-window', class: 'btn btn-primary btn-lg'}  %>
       </div>
 
-
+      <div id="approve_modal-window" class="modal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title" id="myModalLabel">Choose tag:</h4>
+              <button type="button" class="close" data-dismiss="modal">x</button>
+            </div>
+            <div class="modal-body">
+              <%=select :name, :tag_id, Tag.all.collect { |t| [ t.name, t.id ] }, { include_blank: false }%>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-primary">Approve</button>
+            </div>
+          </div>
+        </div>
+      </div>
 
     <%end%>
   <%end%>

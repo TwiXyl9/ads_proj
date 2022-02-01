@@ -29,6 +29,8 @@ class AdsController < ApplicationController
 
   def index
     @ads = Ad.paginate(page: params[:page])
+    @tags = Tag.all
+
   end
 
   def show
@@ -59,7 +61,7 @@ class AdsController < ApplicationController
        if params[:stage] == "published"
          params[:ad_ids].each do |id|
            @ad = Ad.find(id)
-           @ad.update(:stage => params[:stage])
+           @ad.update(:stage => params[:stage], :tag => params[:tag])
          end
        else
          params[:ad_ids].each do |id|
@@ -72,7 +74,13 @@ class AdsController < ApplicationController
   end
 
   def reject_multiple
-    @ad_ids = params[:ad_ids]
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
+  def approve_multiple
     respond_to do |format|
       format.html
       format.js

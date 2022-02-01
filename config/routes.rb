@@ -21,6 +21,7 @@ Rails.application.routes.draw do
       delete 'destroy_multiple'
       patch 'update_multiple'
       get 'reject_multiple'
+      get 'approve_multiple'
     end
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
