@@ -1,32 +1,40 @@
-<header class="navbar navbar-fixed-top navbar-inverse" id="header1" style="background-color: indigo;">
-  <div class="container">
-    <%= link_to "ads app", root_path, id: "logo" %>
-    <nav>
-      <ul class="nav navbar-nav navbar-right" style="display: inline;">
-        <li><%= link_to "Home",    ads_path %></li>
-        <li><%= link_to "Help",    help_path %></li>
-        <% if logged_in? %>
-          <li><%= link_to "Users", users_path %></li>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              Account <b class="caret"></b>
-            </a>
-            <ul class="dropdown-menu">
-              <%if current_user.role == "admin" %>
-                <li><%= link_to "My Ads", current_user %></li>
-                <li><%= link_to "Tags", tags_path %></li>
-              <%end %>
-              <li><%= link_to "Settings", edit_user_path(current_user) %></li>
-              <li class="divider"></li>
-              <li>
-                <%= button_to "Log out", logout_path, method: "delete" %>
-              </li>
-            </ul>
+<header>
+  <nav class="navbar navbar-expand-lg navbar-light bg-secondary">
+    <div class="container-fluid">
+
+      <%= link_to "ads app", root_path, id: "logo", class: "navbar-brand" %>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
+
+          <li class="nav-item">
+            <%= link_to "Home",    ads_path, class: "nav-link" %>
           </li>
-        <% else %>
-          <li><%= link_to "Log in", login_path %></li>
-        <% end %>
-      </ul>
-    </nav>
-  </div>
+          <li class="nav-item">
+            <%= link_to "Help",    help_path, class: "nav-link" %>
+          </li>
+          <%if logged_in? %>
+            <li class="nav-item">
+              <%= link_to "Users", users_path, class: "nav-link"%>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Account
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <%if current_user.role != "admin" %>
+                    <%= link_to "My Ads", current_user, class: "dropdown-item" %>
+                    <%= link_to "Tags", tags_path, class: "dropdown-item" %>
+                <%end %>
+                <%= link_to "Settings", edit_user_path(current_user), class: "dropdown-item" %>
+                <hr class="dropdown-divider">
+                <%= link_to "Log out", logout_path, method: "delete", class: "dropdown-item" %>
+              </div>
+            </li>
+          <%else%>
+            <li><%= link_to "Log in", login_path, class: "nav-link" %></li>
+          <%end%>
+        </ul>
+      </div>
+    </div>
+  </nav>
 </header>

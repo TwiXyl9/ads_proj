@@ -12,8 +12,9 @@ class TagsController < ApplicationController
       flash[:success] = "Tag created!"
       redirect_to tags_path
     else
-      puts @ad.errors.full_messages
-      render tags_path
+      puts @tag.errors.full_messages
+      flash[:danger] = @tag.errors.full_messages
+      redirect_to tags_path
     end
   end
 
@@ -50,16 +51,6 @@ class TagsController < ApplicationController
     end
   end
 
-  def destroy_multiple
-  end
-
-  def update_multiple
-
-  end
-
-  def reject_multiple
-
-  end
 
   private
 

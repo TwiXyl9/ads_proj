@@ -2,11 +2,11 @@ class AdsController < ApplicationController
 
   before_action :logged_in_user, only: [:create, :destroy]
 
-  skip_before_action :verify_authenticity_token, only: [:destroy_multiple, :reject_multiple, :update_multiple]
 
   def new
     @ad = Ad.new
     @ad.stage = "draft"
+
   end
 
   def create
@@ -57,16 +57,21 @@ class AdsController < ApplicationController
   end
 
   def update_multiple
-     if params[:ad_ids] && params[:stage]
-       if params[:stage] == "published"
+    puts params
+     if params[:ad_ids]
+       if params[:reason] && params[:reason].strip != ""
+           params[:ad_ids].each do |id|
+             @ad = Ad.find(id)
+             @ad.update(:stage => Ad.stages["rejected"], :reason_for_rejection => params[:reason])
+           end
+       elsif params[:tags]
+         @tag = Tag.find(params[:tags][:name])
+         puts @tag
+         puts params[:ad_ids]
          params[:ad_ids].each do |id|
            @ad = Ad.find(id)
-           @ad.update(:stage => params[:stage], :tag => params[:tag])
-         end
-       else
-         params[:ad_ids].each do |id|
-           @ad = Ad.find(id)
-           @ad.update(:stage => params[:stage], :reason_for_rejection => params[:reason])
+           @ad.update(:stage => "published")
+           @ad.tags << @tag
          end
        end
      end
@@ -75,14 +80,12 @@ class AdsController < ApplicationController
 
   def reject_multiple
     respond_to do |format|
-      format.html
       format.js
     end
   end
 
   def approve_multiple
     respond_to do |format|
-      format.html
       format.js
     end
   end
@@ -90,7 +93,7 @@ class AdsController < ApplicationController
   private
 
   def ad_params
-    params.require(:ad).permit(:tag,:stage,:name,:description,{photos:[]})
+    params.require(:ad).permit(:tags,:stage,:name,:description,{photos:[]})
   end
 
 end

@@ -1,3 +1,4 @@
 class Tag < ApplicationRecord
-  has_many :ads
+  has_and_belongs_to_many :ads
+  validates :name, presence: true
 end

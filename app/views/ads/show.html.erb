@@ -5,9 +5,20 @@
       <%= @ad.name %>
     </h1>
 
-    <h2>
-      <%= @ad.tag if @ad.stage == "published" %>
-    </h2>
+    <div>
+      <%if @ad.stage == "published" %>
+        <div style="display:flex; text-align: center; justify-content: center;">
+          <%@ad.tags.each do |tag|%>
+            <div style="margin: 5px; border: 3px solid #1b6d85; border-radius: 10px">
+              <h2 style="margin: 3px; text-align: center; justify-content: center;">
+                <%=tag.name %>
+              </h2>
+            </div>
+          <%end %>
+        </div>
+
+      <%end%>
+    </div>
 
     <h2>
       <%= @ad.description %>

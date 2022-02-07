@@ -6,7 +6,6 @@ class CreateAds < ActiveRecord::Migration[7.0]
       t.integer :stage
       t.string :reason_for_rejection
       t.string :photos, array: true, default: []
-      t.references :tag,  foreign_key: true
       t.references :user, null: false, foreign_key: true
       t.timestamps
     end

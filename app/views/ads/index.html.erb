@@ -55,7 +55,6 @@
               <button type="button" class="close" data-dismiss="modal">x</button>
             </div>
             <div class="modal-body">
-              <%=hidden_field_tag :stage, :rejected %>
               <%= text_field_tag 'reason' %>
             </div>
             <div class="modal-footer">
@@ -65,9 +64,9 @@
         </div>
       </div>
 
-      <div style="display:flex; text-align: center; justify-content: center;"
-        <%= link_to 'Approve', approve_multiple_ads_path,  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#approve_modal-window', class: 'btn btn-primary btn-lg'}  %>
-        <%= link_to 'Reject', reject_multiple_ads_path,  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#reject_modal-window', class: 'btn btn-primary btn-lg'}  %>
+      <div style="display:flex; text-align: center; justify-content: center;">
+         <%= link_to 'Approve', approve_multiple_ads_path,  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#approve_modal-window', class: 'btn btn-primary btn-lg'}  %>
+         <%= link_to 'Reject', reject_multiple_ads_path,  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#reject_modal-window', class: 'btn btn-primary btn-lg'}  %>
       </div>
 
       <div id="approve_modal-window" class="modal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -78,7 +77,7 @@
               <button type="button" class="close" data-dismiss="modal">x</button>
             </div>
             <div class="modal-body">
-              <%=select :name, :tag_id, Tag.all.collect { |t| [ t.name, t.id ] }, { include_blank: false }%>
+              <%=select :tags, :name, Tag.all.collect { |t| [ t.name, t.id ] }, { include_blank: false }%>
             </div>
             <div class="modal-footer">
               <button class="btn btn-primary">Approve</button>

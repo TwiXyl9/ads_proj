@@ -15,9 +15,6 @@ input {
 .checkbox{
 
 }
-body {
-  padding-top: 60px;
-}
 
 section {
   overflow: auto;
@@ -78,13 +75,13 @@ p {
 
 }
 #logo {
-  float: left;
+  text-align: center;
+  float: none;
   margin-right: 10px;
-  font-size: 1.7em;
+  font-size: 3em;
   color: #fff;
   text-transform: uppercase;
   letter-spacing: -1px;
-  padding-top: 9px;
   font-weight: bold;
 }
 
@@ -93,6 +90,9 @@ p {
   text-decoration: none;
 }
 
+.nav-bar{
+  font-size: 1.2em;
+}
 /* footer */
 
 footer {
@@ -211,21 +211,21 @@ input {
 }
 
 /* for dropdowns only */
-.navbar-custom .navbar-nav .dropdown-menu {
-  background-color: #5bc0de;
-  a{
-    color: white;
-    &:hover {
-      color: #5bc0de;
-      background-color: white;
-    }
-  }
-}
-
-/* dropdown item text color */
-.navbar-inverse .navbar-nav > li > a {
-  color: #ffffff;
-}
+//.navbar-custom .navbar-nav .dropdown-menu {
+//  background-color: #5bc0de;
+//  a{
+//    color: white;
+//    &:hover {
+//      color: #5bc0de;
+//      background-color: white;
+//    }
+//  }
+//}
+//
+///* dropdown item text color */
+//.navbar-inverse .navbar-nav > li > a {
+//  color: #ffffff;
+//}
 
 .image-box {
   text-align: center;
@@ -268,3 +268,4 @@ input {
   cursor: pointer; /* Pointer/hand icon */
   float: left; /* Float the buttons side by side */
 }
+
